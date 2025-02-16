@@ -1,10 +1,11 @@
-
 import React, { useState } from 'react';
 import { PreviewSection } from '@/components/PreviewSection';
 import { ControlPanel } from '@/components/ControlPanel';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { Sparkles } from 'lucide-react';
 
 const Index = () => {
   const [selectedImage, setSelectedImage] = useState<string | undefined>();
@@ -82,37 +83,103 @@ const Index = () => {
     }
   };
 
+  const containerVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        staggerChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 }
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-muted/20 p-6 transition-colors duration-300">
+    <motion.div 
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
+      className="min-h-screen bg-gradient-to-b from-background to-muted/20 p-6 transition-colors duration-300"
+    >
       <div className="max-w-4xl mx-auto relative">
         <ThemeToggle />
         
-        <div className="text-center mb-12 space-y-6">
-          <h1 className="text-5xl font-bold tracking-tight animate-fadeIn">
-            <span className="gradient-text">Face Detection</span> App
+        <motion.div 
+          variants={itemVariants}
+          className="text-center mb-12 space-y-6 relative"
+        >
+          <h1 className="text-6xl font-bold tracking-tight">
+            <motion.span
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+              className="gradient-text inline-flex items-center gap-2"
+            >
+              Face Detection <Sparkles className="w-8 h-8" />
+            </motion.span>
+            <motion.span
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+              className="text-foreground"
+            >
+              App
+            </motion.span>
           </h1>
-          <p className="text-muted-foreground animate-fadeIn text-lg max-w-md mx-auto">
+          
+          <motion.p 
+            variants={itemVariants}
+            className="text-muted-foreground text-lg max-w-md mx-auto"
+          >
             Upload an image or use your webcam to detect faces in real-time
-          </p>
-        </div>
+          </motion.p>
 
-        <div className="space-y-8 animate-slideIn">
-          <PreviewSection
-            imageUrl={selectedImage}
-            videoStream={webcamStream}
-            isProcessing={isProcessing}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.4 }}
+            className="absolute -z-10 w-64 h-64 bg-primary/5 rounded-full blur-3xl top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
           />
+        </motion.div>
 
-          <ControlPanel
-            onImageUpload={handleImageUpload}
-            onWebcamToggle={toggleWebcam}
-            onDownload={handleDownload}
-            isWebcamActive={!!webcamStream}
-            canDownload={!!selectedImage}
-          />
-        </div>
+        <motion.div 
+          variants={containerVariants}
+          className="space-y-8"
+        >
+          <motion.div
+            variants={itemVariants}
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.2 }}
+          >
+            <PreviewSection
+              imageUrl={selectedImage}
+              videoStream={webcamStream}
+              isProcessing={isProcessing}
+            />
+          </motion.div>
+
+          <motion.div
+            variants={itemVariants}
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.2 }}
+          >
+            <ControlPanel
+              onImageUpload={handleImageUpload}
+              onWebcamToggle={toggleWebcam}
+              onDownload={handleDownload}
+              isWebcamActive={!!webcamStream}
+              canDownload={!!selectedImage}
+            />
+          </motion.div>
+        </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
