@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { PreviewSection } from '@/components/PreviewSection';
 import { ControlPanel } from '@/components/ControlPanel';
+import { ThemeToggle } from '@/components/ThemeToggle';
 import { useToast } from "@/hooks/use-toast";
 
 const Index = () => {
@@ -66,8 +67,10 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-muted/20 p-6">
-      <div className="max-w-4xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-b from-background to-muted/20 p-6 transition-colors duration-300">
+      <div className="max-w-4xl mx-auto relative">
+        <ThemeToggle />
+        
         <div className="text-center mb-12 space-y-4">
           <h1 className="text-4xl font-bold tracking-tight animate-fadeIn">
             Face Detection App
