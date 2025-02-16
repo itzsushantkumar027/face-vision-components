@@ -4,23 +4,30 @@ import { PreviewSection } from '@/components/PreviewSection';
 import { ControlPanel } from '@/components/ControlPanel';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { useToast } from "@/hooks/use-toast";
+import { useNavigate } from 'react-router-dom';
 
 const Index = () => {
   const [selectedImage, setSelectedImage] = useState<string | undefined>();
   const [webcamStream, setWebcamStream] = useState<MediaStream | undefined>();
   const [isProcessing, setIsProcessing] = useState(false);
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const handleImageUpload = async (file: File) => {
     try {
       setIsProcessing(true);
       const imageUrl = URL.createObjectURL(file);
       setSelectedImage(imageUrl);
-      // Here you would typically send the image to your face detection service
-      toast({
-        title: "Image uploaded successfully",
-        description: "Face detection will be implemented in the next iteration",
-      });
+      
+      // Simulate processing
+      setTimeout(() => {
+        toast({
+          title: "Processing complete",
+          description: "Match found! Redirecting...",
+        });
+        setTimeout(() => navigate('/success'), 1500);
+      }, 2000);
+      
     } catch (error) {
       toast({
         title: "Error uploading image",
@@ -45,8 +52,17 @@ const Index = () => {
         setWebcamStream(stream);
         toast({
           title: "Camera started",
-          description: "Face detection will be implemented in the next iteration",
+          description: "Processing video feed...",
         });
+        
+        // Simulate processing and navigate after 3 seconds
+        setTimeout(() => {
+          toast({
+            title: "Match found!",
+            description: "Redirecting to results...",
+          });
+          setTimeout(() => navigate('/success'), 1500);
+        }, 3000);
       }
     } catch (error) {
       toast({
