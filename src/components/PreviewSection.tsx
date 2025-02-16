@@ -22,7 +22,7 @@ export const PreviewSection: React.FC<PreviewSectionProps> = ({
   }, [videoStream]);
 
   return (
-    <Card className="w-full max-w-3xl mx-auto mt-8 overflow-hidden animate-fadeIn">
+    <Card className="w-full max-w-3xl mx-auto overflow-hidden animate-fadeIn hover:scale-[1.01] transition-transform duration-300">
       <div className="aspect-video relative bg-muted/30">
         {imageUrl ? (
           <img
@@ -42,7 +42,7 @@ export const PreviewSection: React.FC<PreviewSectionProps> = ({
             {isProcessing ? (
               <div className="animate-pulse">Processing...</div>
             ) : (
-              <p>Upload an image or start webcam to begin</p>
+              <p className="text-lg">Upload an image or start webcam to begin</p>
             )}
           </div>
         )}

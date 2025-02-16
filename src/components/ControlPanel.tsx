@@ -29,13 +29,13 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
   };
 
   return (
-    <Card className="p-6 mt-6 animate-slideIn">
-      <div className="flex flex-wrap gap-4 justify-center">
+    <Card className="p-8 animate-slideIn hover:scale-[1.01] transition-transform duration-300">
+      <div className="flex flex-wrap gap-6 justify-center">
         <Button
           onClick={() => fileInputRef.current?.click()}
-          className="neo-button flex items-center gap-2"
+          className="neo-button flex items-center gap-3 text-lg"
         >
-          <Upload className="w-4 h-4" />
+          <Upload className="w-5 h-5" />
           Upload Image
         </Button>
         <input
@@ -48,16 +48,16 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
         
         <Button
           onClick={onWebcamToggle}
-          className="neo-button flex items-center gap-2"
+          className="neo-button flex items-center gap-3 text-lg"
         >
           {isWebcamActive ? (
             <>
-              <Square className="w-4 h-4" />
+              <Square className="w-5 h-5" />
               Stop Camera
             </>
           ) : (
             <>
-              <Camera className="w-4 h-4" />
+              <Camera className="w-5 h-5" />
               Start Camera
             </>
           )}
@@ -66,9 +66,9 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
         {canDownload && (
           <Button
             onClick={onDownload}
-            className="neo-button flex items-center gap-2"
+            className="neo-button flex items-center gap-3 text-lg"
           >
-            <Download className="w-4 h-4" />
+            <Download className="w-5 h-5" />
             Download
           </Button>
         )}

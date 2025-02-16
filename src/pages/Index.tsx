@@ -71,28 +71,30 @@ const Index = () => {
       <div className="max-w-4xl mx-auto relative">
         <ThemeToggle />
         
-        <div className="text-center mb-12 space-y-4">
-          <h1 className="text-4xl font-bold tracking-tight animate-fadeIn">
-            Face Detection App
+        <div className="text-center mb-12 space-y-6">
+          <h1 className="text-5xl font-bold tracking-tight animate-fadeIn">
+            <span className="gradient-text">Face Detection</span> App
           </h1>
-          <p className="text-muted-foreground animate-fadeIn">
+          <p className="text-muted-foreground animate-fadeIn text-lg max-w-md mx-auto">
             Upload an image or use your webcam to detect faces in real-time
           </p>
         </div>
 
-        <PreviewSection
-          imageUrl={selectedImage}
-          videoStream={webcamStream}
-          isProcessing={isProcessing}
-        />
+        <div className="space-y-8 animate-slideIn">
+          <PreviewSection
+            imageUrl={selectedImage}
+            videoStream={webcamStream}
+            isProcessing={isProcessing}
+          />
 
-        <ControlPanel
-          onImageUpload={handleImageUpload}
-          onWebcamToggle={toggleWebcam}
-          onDownload={handleDownload}
-          isWebcamActive={!!webcamStream}
-          canDownload={!!selectedImage}
-        />
+          <ControlPanel
+            onImageUpload={handleImageUpload}
+            onWebcamToggle={toggleWebcam}
+            onDownload={handleDownload}
+            isWebcamActive={!!webcamStream}
+            canDownload={!!selectedImage}
+          />
+        </div>
       </div>
     </div>
   );
